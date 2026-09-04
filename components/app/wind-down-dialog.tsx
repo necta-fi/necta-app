@@ -1,41 +1,29 @@
 "use client"
 
 import { useState } from "react"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
 import { AlertTriangle } from "lucide-react"
 
 export function WindDownDialog() {
   const [open, setOpen] = useState(true)
 
+  if (!open) return null
+
   return (
-    <Dialog open={open} onOpenChange={() => {}}>
-      <DialogContent
-        className="border-white/[0.08] bg-zinc-900/[0.95] backdrop-blur-md sm:max-w-md [&>button:last-child]:hidden"
-        onPointerDownOutside={(e) => e.preventDefault()}
-        onEscapeKeyDown={(e) => e.preventDefault()}
-        onInteractOutside={(e) => e.preventDefault()}
-      >
-        <DialogHeader className="items-center text-center">
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm">
+      <div className="mx-4 w-full max-w-md rounded-lg border border-white/[0.08] bg-zinc-900/[0.95] p-6 shadow-lg backdrop-blur-md">
+        <div className="flex flex-col items-center text-center">
+          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10">
             <AlertTriangle className="h-6 w-6 text-red-500" />
           </div>
-          <DialogTitle className="text-xl text-white">
+          <h2 className="text-xl font-semibold text-white">
             Necta Has Been Discontinued
-          </DialogTitle>
-          <DialogDescription className="text-white/60">
+          </h2>
+          <p className="mt-1 text-sm text-white/60">
             Necta ceased operations in November 2025.
-          </DialogDescription>
-        </DialogHeader>
+          </p>
+        </div>
 
-        <div className="space-y-3 py-2">
+        <div className="mt-4 space-y-3">
           <div className="rounded-lg bg-red-500/10 p-4">
             <p className="text-sm font-medium text-red-400">
               Do not deposit any funds. All services have been permanently shut
@@ -43,7 +31,7 @@ export function WindDownDialog() {
             </p>
           </div>
 
-          <div className="rounded-lg bg-white/[0.05] p-4 text-sm text-white/60 leading-relaxed space-y-2">
+          <div className="space-y-2 rounded-lg bg-white/[0.05] p-4 text-sm leading-relaxed text-white/60">
             <p>
               Please withdraw any remaining funds from your account immediately.
               Smart contracts may still be accessible, but no further
@@ -61,15 +49,16 @@ export function WindDownDialog() {
           </p>
         </div>
 
-        <DialogFooter className="sm:justify-center">
-          <Button
-            className="w-full bg-[#F29600] py-5 text-white hover:bg-[#F29600]/80"
+        <div className="mt-4">
+          <button
+            type="button"
+            className="w-full rounded-md bg-[#F29600] py-3 text-sm font-medium text-white transition-colors hover:bg-[#F29600]/80"
             onClick={() => setOpen(false)}
           >
             I Understand, Continue
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
