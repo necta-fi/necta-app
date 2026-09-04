@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic"
 import { AppHeader } from "@/components/app/app-header"
 import { AppFooter } from "@/components/app/app-footer"
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation"
+import { WindDownDialog } from "@/components/app/wind-down-dialog"
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,6 +16,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="flex-1">{children}</div>
         <AppFooter />
       </div>
+      <WindDownDialog />
     </BackgroundGradientAnimation>
   )
 }
