@@ -3,13 +3,14 @@
 import { useState } from "react"
 import { AppHeader } from "@/components/app/app-header"
 import { AppFooter } from "@/components/app/app-footer"
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation"
 import { AlertTriangle } from "lucide-react"
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [dismissed, setDismissed] = useState(false)
 
   return (
-    <div className="relative min-h-screen bg-[#111111]">
+    <>
       {!dismissed && (
         <div
           style={{
@@ -73,11 +74,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </div>
       )}
 
-      <div className="flex min-h-screen flex-col">
-        <AppHeader />
-        <div className="flex-1">{children}</div>
-        <AppFooter />
-      </div>
-    </div>
+      <BackgroundGradientAnimation
+        containerClassName="min-h-screen"
+        className="relative z-10"
+      >
+        <div className="flex min-h-screen flex-col">
+          <AppHeader />
+          <div className="flex-1">{children}</div>
+          <AppFooter />
+        </div>
+      </BackgroundGradientAnimation>
+    </>
   )
 }
