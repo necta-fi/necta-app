@@ -6,6 +6,7 @@ import { ProtocolScroll } from "@/components/ui/protocol-scroll"
 import { Connect } from "@/components/app/connect"
 import { Button } from "@/components/ui/button"
 import { Rocket } from "lucide-react"
+import { WindDownDialog } from "@/components/app/wind-down-dialog"
 
 export default function AppPage() {
   const { isConnected } = useAccount()
@@ -14,7 +15,9 @@ export default function AppPage() {
   const hasSmartAccount = false // This will come from the hook
 
   return (
-    <main className="flex min-h-[calc(100vh-128px)] flex-col items-center justify-center px-4 pt-24">
+    <>
+      <WindDownDialog />
+      <main className="flex min-h-[calc(100vh-128px)] flex-col items-center justify-center px-4 pt-24">
       <div className="flex w-full max-w-[800px] flex-col items-center gap-12">
         <div className="flex flex-col items-center gap-6 text-center">
           <h1 className="font-semibold text-2xl text-white md:text-3xl lg:text-[40px]">
@@ -61,5 +64,6 @@ export default function AppPage() {
         </div>
       </div>
     </main>
+    </>
   )
 }
