@@ -1,22 +1,18 @@
 "use client"
 
-import { useContractWrite, useContractRead } from "wagmi"
+import { useWriteContract, useReadContract } from "wagmi"
 import { type Address, erc20Abi } from "viem"
 import { env } from "@/env"
 import { useCallback } from "react"
 
-const USDC_ADDRESS = env.NEXT_PUBLIC_USDC_ADDRESS as Address
+export const USDC_ADDRESS = env.NEXT_PUBLIC_USDC_ADDRESS as Address
 
 export function useUSDCApproval() {
-  return useContractWrite({
-    address: USDC_ADDRESS,
-    abi: erc20Abi,
-    functionName: "approve",
-  })
+  return useWriteContract()
 }
 
 export function useUSDCBalance(address?: Address) {
-  const { data, isError, isLoading, refetch } = useContractRead({
+  const { data, isError, isLoading, refetch } = useReadContract({
     address: USDC_ADDRESS,
     abi: erc20Abi,
     functionName: "balanceOf",
@@ -46,7 +42,7 @@ export function useUSDCAllowance({
   owner?: Address
   spender?: Address
 }) {
-  const { data, isError, isLoading, refetch } = useContractRead({
+  const { data, isError, isLoading, refetch } = useReadContract({
     address: USDC_ADDRESS,
     abi: erc20Abi,
     functionName: "allowance",

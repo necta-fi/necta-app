@@ -10,12 +10,10 @@ export class ConsoleKitService {
     if (!env.NEXT_PUBLIC_CONSOLE_API_KEY) {
       throw new Error("CONSOLE_API_KEY is required")
     }
-    this.consoleKit = new ConsoleKit({
-      apiKey: env.NEXT_PUBLIC_CONSOLE_API_KEY,
-      baseUrl: "https://console.brahma.fi/api",
-      chainId: 8453, // Base mainnet
-      rpcUrl: `https://base-mainnet.g.alchemy.com/v2/${env.NEXT_PUBLIC_ALCHEMY_ID}`,
-    })
+    this.consoleKit = new ConsoleKit(
+      env.NEXT_PUBLIC_CONSOLE_API_KEY,
+      "https://console.brahma.fi/api",
+    )
   }
 
   static getInstance(): ConsoleKitService {
@@ -25,41 +23,21 @@ export class ConsoleKitService {
     return ConsoleKitService.instance
   }
 
-  async deployBrahmaAccount(userAddress: Address): Promise<Address> {
-    try {
-      const { accountAddress } = await this.consoleKit.deployAccount({
-        owner: userAddress,
-        chainId: 8453, // Base mainnet
-      })
-      return accountAddress as Address
-    } catch (error) {
-      throw new Error(
-        `Failed to deploy Brahma account: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-      )
-    }
+  get kit(): ConsoleKit {
+    return this.consoleKit
   }
 
-  async getAccountStatus(accountAddress: Address): Promise<{
-    isDeployed: boolean
-    isActive: boolean
-  }> {
-    try {
-      const { isDeployed, isActive } = await this.consoleKit.getAccountStatus({
-        accountAddress,
-        chainId: 8453, // Base mainnet
-      })
-      return {
-        isDeployed,
-        isActive,
-      }
-    } catch (error) {
-      throw new Error(
-        `Failed to get account status: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-      )
-    }
+  async deployBrahmaAccount(userAddress: Address): Promise<Address> {
+    throw new Error(
+      "NectaFi has been discontinued. Account deployment is no longer available.",
+    )
+  }
+
+  async getAccountStatus(
+    _accountAddress: Address,
+  ): Promise<{ isDeployed: boolean; isActive: boolean }> {
+    throw new Error(
+      "NectaFi has been discontinued. Account status checks are no longer available.",
+    )
   }
 }

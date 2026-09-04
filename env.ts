@@ -4,12 +4,12 @@ import { z } from "zod"
 export const env = createEnv({
   server: {},
   client: {
-    NEXT_PUBLIC_APP_URL: z.string().min(1),
-    NEXT_PUBLIC_API_URL: z.string().min(1),
-    NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: z.string().min(1),
-    NEXT_PUBLIC_ALCHEMY_ID: z.string().min(1),
-    NEXT_PUBLIC_USDC_ADDRESS: z.string().min(1),
-    NEXT_PUBLIC_CONSOLE_API_KEY: z.string().min(1),
+    NEXT_PUBLIC_APP_URL: z.string().default("https://nectafi.xyz"),
+    NEXT_PUBLIC_API_URL: z.string().default(""),
+    NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: z.string().default(""),
+    NEXT_PUBLIC_ALCHEMY_ID: z.string().default(""),
+    NEXT_PUBLIC_USDC_ADDRESS: z.string().default(""),
+    NEXT_PUBLIC_CONSOLE_API_KEY: z.string().default(""),
   },
   runtimeEnv: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,

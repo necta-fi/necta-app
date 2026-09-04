@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useAccount } from "wagmi"
-import { parseUnits } from "viem"
+import { parseUnits, erc20Abi } from "viem"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Loader2 } from "lucide-react"
@@ -11,6 +11,7 @@ import {
   useUSDCApproval,
   useUSDCBalance,
   useUSDCAllowance,
+  USDC_ADDRESS,
 } from "@/hooks/use-usdc"
 import { api } from "@/lib/api/client"
 
@@ -29,7 +30,7 @@ export function Deposit({ brahmaAccount, onSuccess }: DepositProps) {
   const [error, setError] = useState<string | null>(null)
 
   // Get USDC contract interactions
-  const { write: approve } = useUSDCApproval()
+  const { writeContract: approve } = useUSDCApproval()
   const { data: balance } = useUSDCBalance(address)
   const { data: allowance, refetch: refetchAllowance } = useUSDCAllowance({
     owner: address,
@@ -53,6 +54,9 @@ export function Deposit({ brahmaAccount, onSuccess }: DepositProps) {
         })
 
         await approve({
+          address: USDC_ADDRESS,
+          abi: erc20Abi,
+          functionName: "approve",
           args: [brahmaAccount, amountInWei],
         })
         await refetchAllowance()
