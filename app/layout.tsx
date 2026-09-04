@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google"
 import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import { WalletProvider } from "@/components/providers/wallet-provider"
+import { WindDownDialog } from "@/components/app/wind-down-dialog"
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
         )}
       >
         <WalletProvider>{children}</WalletProvider>
+        <WindDownDialog />
       </body>
     </html>
   )
